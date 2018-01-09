@@ -13,6 +13,7 @@ import android.provider.Settings;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,6 +31,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
     Button btnStart, btnShare, btnClear;
     TextView txtResult;
     ProgressBar prgBar;
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
                 if(matches != null){
-                    String before = txtResult.getText().toString();
+                    String before = txtResult.getText().toString()+""+System.getProperty("line.separator");
                     String output = matches.get(0).substring(0, 1).toUpperCase() + matches.get(0).substring(1);
                     txtResult.setText(before+" "+output+". ");
                     Log.d(TAG, "onResult = "+matches.get(0));
@@ -196,12 +198,28 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void checkPermission(){
+        /*
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if(!(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED)){
                 Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:"+getPackageName()));
                 startActivity(intent);
                 finish();
             }
+        }
+        */
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            //requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_REQUEST_FINE_LOCATON);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, REQUEST_RECORD_AUDIO_PERMISSION);
+            }
+            return;
         }
     }
 
