@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.littleaozora.hendra.speechtotext2.MainActivity"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btnStart"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:text="Start"
+        android:fontFamily="casual"
+        android:layout_marginBottom="5dp"/>
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@+id/btnStart"
+        android:id="@+id/prgBar"
+        android:visibility="gone"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/prgBar"
+        android:layout_margin="5dp"
+        android:hint="Result will show in here"
+        android:id="@+id/txtResult"
+        android:scrollbars="vertical"
+        android:text=""
+        android:fontFamily="casual"
+        />
+
+    <Button
+        android:id="@+id/btnClear"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnShare"
+        android:background="@android:color/holo_green_dark"
+        android:text="Clear Text"
+        android:fontFamily="casual"/>
+
+    <Button
+        android:id="@+id/btnShare"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/holo_blue_dark"
+        android:text="Share Text"
+        android:fontFamily="casual"/>
+</RelativeLayout>
